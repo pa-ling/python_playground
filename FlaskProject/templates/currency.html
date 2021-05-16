@@ -1,0 +1,33 @@
+{% extends "layouts/main.html" %}
+
+{% block content %}
+    <form method="get">
+        <label for="rate">Exchange rate: </label>
+        <input type="text" name="rate" id="rate" value="{% if rate != None %}{{ rate }}{% endif %}" />
+
+        <label for="src_currency">Source currency:</label>
+        <input type="text" name="src_currency" id="src_currency" value="{% if src_currency != None %}{{ src_currency }}{% endif %}"/>
+
+        <label for="trg_currency">Target currency:</label>
+        <input type="text" name="trg_currency" id="trg_currency" value="{% if trg_currency != None %}{{ trg_currency }}{% endif %}"/>
+
+        <br />
+
+        <input type="submit" value="Create exchange table!" />
+    </form>
+
+    {% if exchanges: %}
+      <table>
+          <tr>
+              <th>{{ src_currency }}</th>
+              <th>{{ trg_currency }}</th>
+          </tr>
+          {% for src_value, trg_value in exchanges.items() %}
+              <tr>
+                  <td>{{ src_value }}</td>
+                  <td>{{ trg_value }}</td>
+              </tr>
+          {% endfor %}
+      </table>
+    {% endif %}
+{% endblock %}
